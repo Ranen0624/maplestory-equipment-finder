@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07101f">
+<meta name="description" content="메이플스토리 장비 찾기 - 레벨, 직업, 장비, 스타포스, 잠재능력 조건 검색 도구">
+<title>메이플스토리 장비 찾기 | Maplestory Equipment Finder</title>
+<style>
+:root{--bg:#07101a;--bg2:#0d1725;--panel:#111d2d;--panel2:#17263a;--line:#2a3b55;--text:#f6f8fc;--muted:#9eacbf;--accent:#54a8ff;--accent2:#a7d6ff;--orange:#ff9f38;--green:#6bd6a0}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:
+radial-gradient(circle at 20% -5%,rgba(42,117,255,.18),transparent 27%),
+radial-gradient(circle at 82% 7%,rgba(255,78,50,.09),transparent 18%),
+linear-gradient(180deg,#07101a,#0d1725 55%,#08111c);
+color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;line-height:1.68}
+a{color:inherit;text-decoration:none}.wrap{width:min(1120px,92vw);margin:auto}
+header{position:sticky;top:0;z-index:30;background:rgba(7,16,26,.84);backdrop-filter:blur(15px);border-bottom:1px solid rgba(255,255,255,.07)}
+nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.navlogo img{display:block;width:225px;max-height:62px;object-fit:contain;object-position:left center}
+.navs{display:flex;gap:16px;color:var(--muted);font-size:13px}.navs a:hover{color:#fff}
+.hero{padding:80px 0 55px;display:grid;grid-template-columns:1fr .95fr;gap:42px;align-items:center}
+.heroLogo{width:min(520px,100%);height:auto;filter:drop-shadow(0 18px 30px rgba(0,0,0,.35))}
+.hero h1{font-size:clamp(38px,6vw,62px);line-height:1.05;margin:22px 0 16px}
+.hero p{color:var(--muted);font-size:18px;max-width:730px}
+.badge{display:inline-flex;padding:6px 10px;border:1px solid rgba(107,214,160,.22);background:rgba(107,214,160,.07);color:#bdebd0;border-radius:999px;font-size:12px;font-weight:800}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}
+.btn{display:inline-flex;padding:12px 17px;border:1px solid var(--line);border-radius:11px;font-weight:850;align-items:center;justify-content:center}
+.btn.primary{background:linear-gradient(135deg,#61b4ff,#3d7dff);color:white;border-color:transparent}
+.preview{background:linear-gradient(180deg,#122034,#0c1624);border:1px solid #2c405c;border-radius:22px;padding:12px;box-shadow:0 24px 75px rgba(0,0,0,.36)}
+.preview img{display:block;width:100%;border-radius:13px}
+section{padding:55px 0}h2{font-size:34px;margin:0 0 10px}h3{margin:0 0 7px}.lead{color:var(--muted);max-width:800px;margin:0 0 28px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:21px}
+.card p{color:var(--muted);margin:0}.kicker{font-size:11px;color:var(--accent2);font-weight:900;letter-spacing:.07em;margin-bottom:5px}
+.download{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;padding:25px;border:1px solid #355072;border-radius:22px;background:linear-gradient(135deg,rgba(84,168,255,.10),rgba(255,159,56,.04))}
+.release{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0 18px}.pill{padding:6px 9px;border:1px solid #36506d;background:#0b1624;border-radius:999px;font-size:12px}.pill.green{color:#bdebd0}
+.meta{background:#0b1624;border:1px solid #2a3b55;border-radius:15px;padding:16px}.metaRow{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #202f44;padding:8px 0;font-size:13px}.metaRow:last-child{border:0}.metaRow span:first-child{color:var(--muted)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.step{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}.stepNum{font-size:12px;color:var(--accent2);font-weight:900;margin-bottom:6px}
+.example{background:#0a1420;border:1px solid #2c4058;border-radius:16px;padding:17px}.row{display:grid;grid-template-columns:160px 1fr;gap:10px;padding:9px 0;border-bottom:1px solid #1d2d41}.row:last-child{border:0}.key{color:var(--muted);font-size:13px}.value{font-weight:750}
+.autocompleteDemo{margin-top:18px;background:#0b1623;border:1px solid #2d415b;border-radius:17px;padding:18px}.searchbox{border:1px solid #405878;background:#09121d;padding:11px 13px;border-radius:10px;width:min(520px,100%);color:white}.suggestions{display:grid;gap:4px;width:min(520px,100%);margin-top:5px}.suggestion{padding:9px 12px;border:1px solid #263c57;background:#0d1928;border-radius:8px;font-size:13px}.suggestion strong{color:#83c5ff}
+.note{margin-top:14px;padding:14px 16px;border-left:4px solid var(--accent);background:rgba(84,168,255,.07);border-radius:0 12px 12px 0;color:#d6e4f4}
+.shots{display:grid;gap:18px}.shot{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden}.shotHead{padding:14px 17px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;font-weight:900}.tag{font-size:11px;color:#c4ead3;font-weight:700}.shot img{display:block;width:100%}.shotCap{padding:13px 17px;color:var(--muted);font-size:13px}
+.faq details{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:9px 0}.faq summary{font-weight:850;cursor:pointer}.faq p{color:var(--muted)}
+footer{border-top:1px solid var(--line);margin-top:35px;padding:32px 0 44px;color:var(--muted);font-size:13px}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.grid3,.steps,.download{grid-template-columns:1fr}}
+@media(max-width:760px){.navs{display:none}.navlogo img{width:180px}.hero{padding-top:48px}.row{grid-template-columns:1fr;gap:2px}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><nav>
+<a class="navlogo" href="#top"><img src="assets/brand_logo.png" alt="메이플스토리 장비 찾기"></a>
+<div class="navs"><a href="#features">기능</a><a href="#download">다운로드</a><a href="#guide">사용법</a><a href="#screens">화면</a><a href="#faq">FAQ</a></div>
+</nav></div></header>
+
+<main id="top">
+<div class="wrap hero">
+<div>
+<span class="badge">● 최신 버전 1.2.0</span>
+<img class="heroLogo" src="assets/brand_logo.png" alt="메이플스토리 장비 찾기 로고">
+<h1>장비 이름부터 잠재능력까지<br>원하는 조건으로 찾아보세요.</h1>
+<p>레벨, 직업, 장비, 스타포스, 잠재능력, 에디셔널 잠재능력을 조합해 공개된 캐릭터 장비 정보에서 원하는 결과를 찾습니다.</p>
+<div class="actions"><a class="btn primary" href="downloads/MaplestoryEquipmentFinder_1.2.0_Windows.zip" download>Windows용 무료 다운로드</a><a class="btn" href="#guide">사용 방법 보기</a></div>
+</div>
+<div class="preview"><img src="assets/app_default.png" alt="메이플스토리 장비 찾기 실제 화면"></div>
+</div>
+
+<section id="features"><div class="wrap">
+<h2>빠르게 조건을 좁히는 장비 검색</h2>
+<p class="lead">원하는 조건만 입력하세요. 장비명과 스타포스는 기본적으로 비어 있어 필요한 경우에만 제한할 수 있습니다.</p>
+<div class="grid3">
+<div class="card"><div class="kicker">CHARACTER</div><h3>레벨 · 직업 검색</h3><p>레벨 범위와 직업 대분류·세부 직업을 선택해 후보 캐릭터를 좁힙니다.</p></div>
+<div class="card"><div class="kicker">AUTOCOMPLETE</div><h3>장비명 자동완성</h3><p>장비명의 일부만 입력해도 관련 장비를 추천합니다. 검색 중 발견한 장비명도 자동으로 추천 데이터에 추가됩니다.</p></div>
+<div class="card"><div class="kicker">OPTIONS</div><h3>스타포스 · 잠재 · 에디</h3><p>스타포스와 잠재능력·에디셔널 옵션까지 원하는 만큼 세밀하게 지정할 수 있습니다.</p></div>
+</div>
+</div></section>
+
+<section><div class="wrap">
+<h2>장비명은 일부만 입력해도 됩니다</h2>
+<p class="lead">예를 들어 <b>아스트라</b>라고 입력하면 관련 장비명이 즉시 추천됩니다.</p>
+<div class="autocompleteDemo">
+<div class="searchbox">아스트라</div>
+<div class="suggestions">
+<div class="suggestion"><strong>아스트라</strong> 메달</div>
+<div class="suggestion"><strong>아스트라</strong> 세이크리드 이지스</div>
+<div class="suggestion"><strong>아스트라</strong> 아케인 실드</div>
+<div class="suggestion"><strong>아스트라</strong> 베인 실드</div>
+<div class="suggestion"><strong>아스트라</strong> 프로미넌트 실드</div>
+</div>
+</div>
+<div class="note">현재 버전에는 공식 아스트라 보조무기 전체 목록을 기본으로 포함했고, 프로그램이 실제 캐릭터 장비를 조회하면서 발견하는 장비명을 로컬 추천 목록에 자동으로 추가합니다.</div>
+</div></section>
+
+<section id="download"><div class="wrap">
+<h2>다운로드</h2><p class="lead">압축을 풀고 메이플스토리 장비 찾기를 실행하면 됩니다.</p>
+<div class="download">
+<div><div class="kicker">CURRENT RELEASE</div><h3 style="font-size:28px">메이플스토리 장비 찾기 1.2.0</h3><p style="color:var(--muted)">Maplestory Equipment Finder for Windows</p>
+<div class="release"><span class="pill green">무료</span><span class="pill">Windows</span><span class="pill">Version 1.2.0</span><span class="pill">약 472.4 KB</span></div>
+<a class="btn primary" href="downloads/MaplestoryEquipmentFinder_1.2.0_Windows.zip" download>다운로드</a></div>
+<div class="meta">
+<div class="metaRow"><span>파일명</span><strong>MaplestoryEquipmentFinder_1.2.0_Windows.zip</strong></div>
+<div class="metaRow"><span>API</span><strong>NEXON Open API</strong></div>
+<div class="metaRow"><span>검색 결과</span><strong>화면 + CSV 저장</strong></div>
+<div class="metaRow"><span>추천 데이터</span><strong>기본 + 자동 학습</strong></div>
+</div></div>
+</div></section>
+
+<section id="guide"><div class="wrap">
+<h2>처음 사용하는 방법</h2><p class="lead">네 단계만 거치면 바로 검색할 수 있습니다.</p>
+<div class="steps">
+<div class="step"><div class="stepNum">STEP 01</div><h3>다운로드</h3><p style="color:var(--muted)">Windows용 ZIP을 받고 원하는 폴더에 압축을 풉니다.</p></div>
+<div class="step"><div class="stepNum">STEP 02</div><h3>프로그램 실행</h3><p style="color:var(--muted)">메이플스토리 장비 찾기를 실행합니다.</p></div>
+<div class="step"><div class="stepNum">STEP 03</div><h3>API Key 입력</h3><p style="color:var(--muted)">NEXON Open API에서 발급받은 Key를 입력합니다.</p></div>
+<div class="step"><div class="stepNum">STEP 04</div><h3>조건 설정</h3><p style="color:var(--muted)">원하는 조건을 입력하고 검색 시작을 누릅니다.</p></div>
+</div>
+<div class="example" style="margin-top:22px">
+<div class="row"><div class="key">장비명</div><div class="value">비어 있음 → 모든 장비 허용 / 일부 입력 시 자동완성</div></div>
+<div class="row"><div class="key">스타포스</div><div class="value">비어 있음 → 무관 / 22 입력 → 22성만</div></div>
+<div class="row"><div class="key">잠재능력</div><div class="value">마12 · 공12 · 보공30 · 방무40 · 올6처럼 줄여 입력 가능</div></div>
+<div class="row"><div class="key">에디셔널</div><div class="value">무관으로 두면 에디셔널 조건을 제한하지 않음</div></div>
+</div>
+</div></section>
+
+<section id="screens"><div class="wrap">
+<h2>실제 프로그램 화면</h2><p class="lead">새 자동완성 기능도 실제 프로그램 화면에서 확인할 수 있습니다.</p>
+<div class="shots">
+<div class="shot"><div class="shotHead"><span>기본 검색 화면</span><span class="tag">실제 실행 화면</span></div><img src="assets/app_default.png" alt="기본 검색 화면"><div class="shotCap">장비명과 스타포스는 기본값이 비어 있으며 필요한 조건만 입력해서 사용할 수 있습니다.</div></div>
+<div class="shot"><div class="shotHead"><span>장비명 자동완성</span><span class="tag">실제 기능 화면</span></div><img src="assets/app_autocomplete.png" alt="장비 자동완성 화면"><div class="shotCap">'아스트라'를 입력했을 때 관련 장비명 후보가 자동으로 표시되는 모습입니다.</div></div>
+</div>
+</div></section>
+
+<section id="faq"><div class="wrap faq">
+<h2>자주 묻는 질문</h2>
+<details open><summary>모든 메이플스토리 장비가 처음부터 추천되나요?</summary><p>완전한 자동완성을 위해서는 전체 장비명 카탈로그가 필요합니다. 현재 버전은 공식 아스트라 장비와 관련 장비를 기본으로 포함하고, 실제 검색에서 발견되는 장비명을 자동으로 학습해 추천 목록을 계속 확장합니다. 별도의 JSON/TXT 장비명 목록도 프로그램에서 추가할 수 있습니다.</p></details>
+<details><summary>왜 전체 장비 DB를 Open API에서 바로 받지 않나요?</summary><p>현재 NEXON Open API는 캐릭터의 장착 장비와 프리셋 데이터를 제공하는 구조이며, 프로그램에서 바로 내려받을 수 있는 전체 장비명 카탈로그는 별도로 제공되지 않아 로컬 카탈로그 방식으로 구성했습니다.</p></details>
+<details><summary>장비명을 비워두면 어떻게 되나요?</summary><p>장비 이름으로 제한하지 않고 다른 조건만으로 검색합니다.</p></details>
+<details><summary>검색 도중 새 장비가 나오면?</summary><p>조회한 캐릭터의 장비명은 로컬 추천 데이터에 자동으로 추가되어 다음 검색부터 자동완성에 사용할 수 있습니다.</p></details>
+</div></section>
+</main>
+
+<footer><div class="wrap"><b>메이플스토리 장비 찾기 1.2.0</b><br>Maplestory Equipment Finder · NEXON Open API 기반 비공식 장비 검색 도구</div></footer>
+</body></html>
