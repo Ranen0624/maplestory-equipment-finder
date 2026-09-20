@@ -1,0 +1,12 @@
+GitHub 업로드용 1.2.1 정식 공개본
+
+1. 이 폴더의 내용물 전체를 maplestory-equipment-finder 저장소 루트에 업로드합니다.
+2. 기존 index.html / style.css / privacy.html / terms.html / download.html은 새 파일로 교체합니다.
+3. assets 폴더와 downloads 폴더도 함께 업로드합니다.
+4. GitHub Settings > Pages에서 main 브랜치 / root를 배포 대상으로 지정합니다.
+5. 홈페이지의 다운로드 버튼이 MaplestoryEquipmentFinder_1.2.1_Windows.zip을 정상적으로 받는지 확인합니다.
+
+공개 배포 원칙
+- 정식 버전 MaplestoryEquipmentFinder_1.2.1_Windows.zip만 공개합니다.
+- TEST 버전은 더 이상 배포하지 않습니다.
+- PERSONAL_FAST 버전은 개인 전용이므로 GitHub에 올리지 않습니다.
