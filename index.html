@@ -5,7 +5,7 @@
 <meta property="og:title" content="MapleTools · 장비와 유니온을 한곳에서"><meta property="og:description" content="Windows용 메이플 장비·유니온 챔피언 통합 검색 도구"><meta property="og:image" content="assets/app-preview.png">
 <meta name="theme-color" content="#080916"><meta name="description" content="장비 옵션부터 유니온 챔피언 조합까지. 메이플스토리 공개 데이터를 탐색하는 Windows 통합 검색 도구, MapleTools.">
 <title>MapleTools · 메이플을 찾는 새로운 방법</title>
-<link rel="icon" href="assets/favicon.ico"><link rel="stylesheet" href="styles.css">
+<link rel="icon" href="assets/favicon.ico"><link rel="stylesheet" href="styles.css?v=fixed-window-2">
 </head>
 <body>
 <a class="skip" href="#tools">본문으로 이동</a>
@@ -26,8 +26,8 @@
 </div></section>
 <section class="section experience-section" id="experience"><div class="section-heading reveal"><div><p class="eyebrow">TAKE A CLOSER LOOK</p><h2>직접 입력하고,<br>결과를 확인해 보세요.</h2></div><p>통합 홈에서 검색기를 고르고 조건을 입력하세요.<br><strong>실제 API 연결 없이 브라우저에서 체험할 수 있습니다.</strong></p></div>
 <p class="interactive-notice">실제 프로그램과 기능과 Ui가 다를 수 있습니다. 기능설명을 위한 예시입니다.</p>
-<div class="interactive-toolbar"><span>직접 클릭하고 입력해 보세요. 검색 결과는 가상 예시입니다.</span><a href="demo.html" target="_blank" rel="noopener">체험판 크게 열기 ↗</a></div>
-<iframe class="interactive-frame" id="interactive-frame" src="demo.html" loading="lazy" title="MapleTools 직접 조작 웹 체험판"></iframe>
+<div class="interactive-toolbar"><span>직접 클릭하고 입력해 보세요. 검색 결과는 가상 예시입니다.</span><a href="demo.html?v=fixed-window-2" target="_blank" rel="noopener">체험판 크게 열기 ↗</a></div>
+<iframe class="interactive-frame" id="interactive-frame" src="demo.html?v=fixed-window-2" loading="lazy" title="MapleTools 직접 조작 웹 체험판"></iframe>
 <noscript><p>웹 체험판을 사용하려면 브라우저에서 JavaScript를 허용해 주세요.</p></noscript>
 <div class="detail-features"><article><span>01 / TIMELINE</span><h3>캐릭터의 발자취까지</h3><p>상세 창에서 레벨·닉네임·길드·월드 등 캐릭터의 변화 이력을 확인하세요.</p></article><article><span>02 / OUTFIT HISTORY</span><h3>날짜별 코디 기록</h3><p>기간을 지정해 캐릭터의 코디 변화를 살펴보고 공개된 과거 기록을 탐색하세요.</p></article><article><span>03 / SAVE & RESUME</span><h3>검색을 이어서, 결과는 따로</h3><p>장비 검색의 체크포인트·이어하기와 결과 CSV 저장으로 긴 탐색도 이어갈 수 있어요.</p></article></div></section>
 <section class="section guide-section" id="guide"><div class="section-heading reveal"><div><p class="eyebrow">QUICK START</p><h2>탐색의 시작은,<br>세 단계면 충분해요.</h2></div><a class="text-button" href="https://openapi.nexon.com/" target="_blank" rel="noopener noreferrer">NEXON Open API 방문 <span>↗</span></a></div><div class="steps"><article class="reveal"><span>01</span><h3>다운로드하고 실행</h3><p>Windows용 ZIP 파일을 내려받아 압축을 풀고 <code>Run_MapleTools.vbs</code>를 실행하세요. 첫 실행에는 필요한 구성 요소를 준비합니다.</p></article><article class="reveal"><span>02</span><h3>공통 API Key 설정</h3><p>NEXON Open API에서 발급받은 키를 프로그램 설정에 저장하세요. 한 번 설정하면 두 검색기에 함께 적용됩니다.</p></article><article class="reveal"><span>03</span><h3>조건을 넣고 검색</h3><p>장비 옵션이나 캐릭터 조합을 입력하세요. 결과에서 상세 정보를 확인하고, 필요한 목록은 CSV로 저장할 수 있습니다.</p></article></div>
@@ -36,5 +36,5 @@
 </main>
 <footer><a class="footer-brand" href="#home">MapleTools<span>작은 단서, 새로운 발견.</span></a><p>Data based on NEXON Open API<br>메이플스토리 관련 이미지와 데이터의 권리는 각 권리자에게 있습니다.<br>NEXON의 공식 서비스가 아닌 독립적인 도구입니다.</p><div class="footer-links"><a href="privacy.html">개인정보 처리방침</a><a href="terms.html">이용안내</a><a href="#home">맨 위로 ↑</a></div></footer>
 
-<script src="app.js" defer></script>
+<script src="app.js?v=fixed-window-2" defer></script>
 </body></html>

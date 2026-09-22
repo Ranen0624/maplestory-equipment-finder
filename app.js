@@ -21,21 +21,8 @@ if ('IntersectionObserver' in window && !reducedMotion.matches) {
 }
 $$('.tool-card').forEach(card=>card.addEventListener('pointermove',event=>{const rect=card.getBoundingClientRect();card.style.setProperty('--mx',`${event.clientX-rect.left}px`);card.style.setProperty('--my',`${event.clientY-rect.top}px`);}));
 const demoFrame=$('#interactive-frame');
-// Fit the embedded demo to its current screen, including mobile layouts.
-const demoOrigin=new URL(demoFrame.src,location.href).origin;
-addEventListener('message',event=>{
- if(event.source!==demoFrame.contentWindow||event.origin!==demoOrigin)return;
- if(event.data?.type!=='mapletools-demo-height')return;
- const height=event.data.height;
- if(!Number.isFinite(height)||height<100||height>20000)return;
- const nextHeight=`${Math.ceil(height)+2}px`;
- if(demoFrame.style.height!==nextHeight){demoFrame.style.height=nextHeight;updateProgress();}
-});
-demoFrame.addEventListener('load',()=>demoFrame.contentWindow.postMessage(
- {type:'mapletools-request-height'},demoOrigin==='null'?'*':demoOrigin
-));
 function openDemo(app){
- const target=`demo.html?app=${encodeURIComponent(app)}`;
+ const target=`demo.html?v=fixed-window-2&app=${encodeURIComponent(app)}`;
  demoFrame.src=target;
  $('#experience').scrollIntoView({behavior:reducedMotion.matches?'instant':'smooth'});
 }

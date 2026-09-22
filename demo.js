@@ -48,7 +48,7 @@ function syncWorlds(prefix){const type=$(`#${prefix}-world-type`).value;selectOp
 ['eq','un'].forEach(p=>$(`#${p}-world-type`).addEventListener('change',()=>syncWorlds(p)));
 function stopSearch(){if(timer){clearTimeout(timer);timer=null;}$('#search-button').disabled=false;$('#search-button').textContent='⌕ 예시 검색 시작';}
 function showPage(page){
- currentPage=page;
+ currentPage=page;$('.app-content').scrollTop=0;
  ['search','results','logs'].forEach(p=>$(`#page-${p}`).hidden=page!==p);
  $$('#module-nav [data-page]').forEach(b=>{if(b.dataset.page===page)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
  $('#page-results h2').textContent=currentApp==='union'?'검색 기록':'검색 결과';
@@ -128,21 +128,3 @@ window.addEventListener('message',e=>{if(e.source!==parent)return;if(location.pr
 selectOptions($('#eq-job'),[...jobs.전사,'전체']);
 const initial=new URLSearchParams(location.search).get('app');openApp(initial||'home');
 
-// Measure content rather than viewport height so the frame can also shrink.
-if(window.parent!==window){
- let heightFrame=0;
- const reportHeight=()=>{
-  cancelAnimationFrame(heightFrame);
-  heightFrame=requestAnimationFrame(()=>parent.postMessage({
-   type:'mapletools-demo-height',height:Math.ceil(document.body.getBoundingClientRect().height)
-  },location.origin==='null'?'*':location.origin));
- };
- new ResizeObserver(reportHeight).observe(document.body);
- addEventListener('load',reportHeight);
- addEventListener('message',event=>{
-  if(event.source!==parent||event.origin!==location.origin)return;
-  if(event.data?.type==='mapletools-request-height')reportHeight();
- });
- document.fonts.ready.then(reportHeight);
- reportHeight();
-}
