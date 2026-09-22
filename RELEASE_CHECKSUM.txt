@@ -1,3 +1,0 @@
-MaplestoryEquipmentFinder_1.2.1_Windows.zip
-SHA-256: e5cdf4bd35f428f04e4f43833b70af22b1d70f2cf87fb98ccb557cc36a3271a3
-Size: 1504250 bytes
