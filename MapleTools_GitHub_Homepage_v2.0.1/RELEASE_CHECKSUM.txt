@@ -1,0 +1,7 @@
+SHA-256
+3c3390b10ad5fb8aa61fee7fce908a8cc66a48819c75d698d560ce6a0171a839  downloads/MapleTools_2.0.1_Windows.zip
+
+Previous release
+MaplestoryEquipmentFinder_1.2.1_Windows.zip
+SHA-256: e5cdf4bd35f428f04e4f43833b70af22b1d70f2cf87fb98ccb557cc36a3271a3
+Size: 1504250 bytes
