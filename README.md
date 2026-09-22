@@ -8,7 +8,7 @@
 2. Pages가 저장소 루트에서 배포된다면 루트에, `docs/`에서 배포된다면 `docs/` 안에 복사합니다. 기존에 별도 빌드가 있다면 아래 파일을 그 배포 결과물에 통합합니다.
 3. 커밋 후 기존 GitHub Pages 배포가 완료되면 홈페이지를 확인합니다.
 
-모든 내부 경로는 상대 경로입니다. `[https://ranen0624.github.io/maplestory-equipment-finder/](https://ranen0624.github.io/mapletools/)`처럼 하위 경로에서도 작동합니다. 프레임워크, 빌드, 외부 CDN이 필요하지 않습니다. 로컬에서는 `index.html`을 브라우저에서 열어 볼 수 있습니다.
+모든 내부 경로는 상대 경로입니다. `https://ranen0624.github.io/mapletools/`처럼 하위 경로에서도 작동합니다. 프레임워크, 빌드, 외부 CDN이 필요하지 않습니다. 로컬에서는 `index.html`을 브라우저에서 열어 볼 수 있습니다.
 
 ## 구성
 
