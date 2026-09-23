@@ -1,4 +1,7 @@
 'use strict';
+const embedded=window.self!==window.top;
+if(embedded)document.documentElement.classList.add('is-embedded');
+document.addEventListener('keydown',event=>{if(embedded&&event.key==='Escape'&&!document.querySelector('dialog[open]'))parent.postMessage({type:'mapletools-release-scroll'},location.origin);});
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const jobs={전사:['아델','히어로','팔라딘','다크나이트','소울마스터','미하일','아란','블래스터','데몬슬레이어','데몬어벤져','카이저','제로','렌'],마법사:['비숍','아크메이지(불,독)','아크메이지(썬,콜)','플레임위자드','에반','루미너스','배틀메이지','키네시스','일리움','라라'],궁수:['보우마스터','신궁','패스파인더','윈드브레이커','메르세데스','와일드헌터','카인'],도적:['나이트로드','섀도어','듀얼블레이더','나이트워커','팬텀','카데나','호영','칼리'],해적:['바이퍼','캡틴','캐논마스터','스트라이커','은월','메카닉','엔젤릭버스터','아크','제논']};
 const allJobs=Object.values(jobs).flat();
@@ -49,6 +52,7 @@ function syncWorlds(prefix){const type=$(`#${prefix}-world-type`).value;selectOp
 function stopSearch(){if(timer){clearTimeout(timer);timer=null;}$('#search-button').disabled=false;$('#search-button').textContent='⌕ 예시 검색 시작';}
 function showPage(page){
  currentPage=page;$('.app-content').scrollTop=0;
+ if(!embedded&&matchMedia('(max-width:700px)').matches)window.scrollTo({top:0,behavior:'instant'});
  ['search','results','logs'].forEach(p=>$(`#page-${p}`).hidden=page!==p);
  $$('#module-nav [data-page]').forEach(b=>{if(b.dataset.page===page)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
  $('#page-results h2').textContent=currentApp==='union'?'검색 기록':'검색 결과';
@@ -57,7 +61,7 @@ function showPage(page){
 function openApp(app){
  if(!['home','equipment','union'].includes(app))return;
  stopSearch();currentApp=app;$('#app-home').hidden=app!=='home';$('#app-module').hidden=app==='home';
- if(app==='home')return;
+ if(app==='home'){window.scrollTo({top:0,behavior:'instant'});return;}
  const eq=app==='equipment';$('#module-name').textContent=eq?'메이플 장비 검색기':'메이플 유니온챔피언 검색기';$('#module-icon').src=`assets/${eq?'equipment':'union'}-icon.webp`;$('#module-art').src=`assets/${eq?'equipment':'union'}-art.webp`;$('#search-title').textContent=eq?'⌕ 장비 검색':'⌕ 조합 검색';
  $('#equipment-form').hidden=!eq;$('#union-form').hidden=eq;$('#union-results').hidden=eq;$('#view-results').hidden=!eq;
  $('#equipment-form').querySelectorAll('input,select,button').forEach(el=>el.disabled=!eq);$('#union-form').querySelectorAll('input,select,button').forEach(el=>el.disabled=eq);syncOptions();
@@ -124,7 +128,6 @@ function exportCSV(){
  const quote=v=>'"'+String(v).replaceAll('"','""')+'"';const columns=['구분','닉네임','월드','직업','레벨','장비 또는 조합'];const data=rows.map(r=>['가상 예시',r.name,r.world,r.job,r.level,r.item||r.members.map(m=>`${m[0]} ${m[1]}`).join(' / ')]);const blob=new Blob(['\uFEFF'+[columns,...data].map(row=>row.map(quote).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8;'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`MapleTools_${currentApp}_example.csv`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);$('#app-status').textContent='예시 결과를 CSV로 내보냈습니다.';
 }
 $$('[data-csv]').forEach(b=>b.addEventListener('click',exportCSV));
-window.addEventListener('message',e=>{if(e.source!==parent)return;if(location.protocol!=='file:'&&e.origin!==location.origin)return;if(e.data?.type==='mapletools-open-app')openApp(e.data.app);});
 selectOptions($('#eq-job'),[...jobs.전사,'전체']);
 const initial=new URLSearchParams(location.search).get('app');openApp(initial||'home');
 
