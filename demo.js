@@ -1,7 +1,6 @@
 'use strict';
 const embedded=window.self!==window.top;
 if(embedded)document.documentElement.classList.add('is-embedded');
-document.addEventListener('keydown',event=>{if(embedded&&event.key==='Escape'&&!document.querySelector('dialog[open]'))parent.postMessage({type:'mapletools-release-scroll'},location.origin);});
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const jobs={전사:['아델','히어로','팔라딘','다크나이트','소울마스터','미하일','아란','블래스터','데몬슬레이어','데몬어벤져','카이저','제로','렌'],마법사:['비숍','아크메이지(불,독)','아크메이지(썬,콜)','플레임위자드','에반','루미너스','배틀메이지','키네시스','일리움','라라'],궁수:['보우마스터','신궁','패스파인더','윈드브레이커','메르세데스','와일드헌터','카인'],도적:['나이트로드','섀도어','듀얼블레이더','나이트워커','팬텀','카데나','호영','칼리'],해적:['바이퍼','캡틴','캐논마스터','스트라이커','은월','메카닉','엔젤릭버스터','아크','제논']};
 const allJobs=Object.values(jobs).flat();

@@ -20,23 +20,6 @@ if ('IntersectionObserver' in window && !reducedMotion.matches) {
  $$('.reveal').forEach(el=>observer.observe(el));
 }
 $$('.tool-card').forEach(card=>card.addEventListener('pointermove',event=>{const rect=card.getBoundingClientRect();card.style.setProperty('--mx',`${event.clientX-rect.left}px`);card.style.setProperty('--my',`${event.clientY-rect.top}px`);}));
-// The embedded preview opts into interaction so normal page scrolling is uninterrupted.
-const demoFrame=$('#interactive-frame'), demoToggle=$('#demo-toggle');
-function setDemoInteraction(active){
- demoToggle.setAttribute('aria-pressed',String(active));
- demoToggle.textContent=active?'홈페이지 스크롤로 돌아가기':'체험 조작 켜기';
- $('#demo-mode').textContent=active?'체험 조작 중 · 끝나면 스크롤로 돌아가세요.':'미리보기 · 휠로 홈페이지를 둘러보세요.';
- demoFrame.inert=!active;
- if(active){demoFrame.removeAttribute('inert');demoFrame.removeAttribute('tabindex');}
- else{demoFrame.setAttribute('inert','');demoFrame.setAttribute('tabindex','-1');}
- $('#demo-shell').classList.toggle('is-interactive',active);
- $('#demo-cover').hidden=active;
-}
-demoToggle.addEventListener('click',()=>setDemoInteraction(demoToggle.getAttribute('aria-pressed')!=='true'));
-window.addEventListener('message',event=>{
- if(event.source!==demoFrame.contentWindow||event.origin!==location.origin)return;
- if(event.data?.type==='mapletools-release-scroll'){setDemoInteraction(false);demoToggle.focus({preventScroll:true});}
-});
 // Decorative particles; no remote requests, no stored user information.
 const canvas=$('#stars'),ctx=canvas.getContext('2d');let particles=[],frameId=0,visible=true,tick=0;
 function resizeStars(){const r=canvas.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(r.width*dpr);canvas.height=Math.round(r.height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);particles=Array.from({length:r.width<700?35:72},()=>({x:Math.random()*r.width,y:Math.random()*r.height,r:Math.random()*1.1+.3,phase:Math.random()*Math.PI*2}));}
